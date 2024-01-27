@@ -17,15 +17,24 @@ This repository contains the code for LuplegDB, a database management system. It
 
 Follow these steps to install and set up the project locally:
 
-1. Clone the repository: `git clone https://github.com/username/repository.git`
-2. Navigate to the project directory: `cd repository`
+1. Clone the repository: `git clone https://github.com/Lupleg/LuplegDB.git`
+2. Navigate to the project directory: `cd LuplegDB`
 3. Install dependencies: `npm install`
 4. Configure the project: [Add any necessary configuration steps here]
 5. [Add any additional installation steps here]
 
 ## Usage
 
-Instructions on how to use the project or any relevant examples.
+To use LuplegDB, follow these steps:
+
+1. Import the LuplegDB module into your project: `const LuplegDB = require('lupleg-db');`
+2. Create a new database instance: `const db = new LuplegDB();`
+3. Connect to a database: `db.connect('your-database-url');`
+4. Perform database operations such as creating tables, inserting data, updating records, and querying data using the provided methods and APIs.
+5. Close the database connection when you're done: `db.close();`
+
+Here's an example of how to insert data into a table:
+
 
 ## Contributing
 
