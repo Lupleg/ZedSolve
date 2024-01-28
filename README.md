@@ -28,7 +28,7 @@ Follow these steps to install and set up the project locally:
 
 ## Usage
 
-To use LuplegDB, follow these steps:
+To use Lupleg Database, follow these steps:
 
 1. Import the LuplegDB module into your project: `const LuplegDB = require('lupleg-db');`
 2. Create a new database instance: `const db = new LuplegDB();`
