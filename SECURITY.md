@@ -11,7 +11,7 @@ Use this section to inform users about the versions of your project that are cur
 | 4.0.x   | :white_check_mark: |
 | < 4.0   | :x:                |
 
-## Reporting a Vulnerability
+## Reporting a Vulnerabilities
 
 
 Use this section to guide users on how to report a vulnerability.
