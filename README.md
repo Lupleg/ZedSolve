@@ -1,4 +1,4 @@
-# LuplegDB
+# TypeScript Course Materials
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
