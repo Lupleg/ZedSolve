@@ -12,12 +12,15 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ZedSolve - Share Your Academic Journey",
-  description: "A platform for students to share assignments, papers, quizzes and academic solutions",
-  keywords: "university, students, assignments, papers, quizzes, academic, solutions, study materials",
+  description:
+    "A platform for students to share assignments, papers, quizzes and academic solutions",
+  keywords:
+    "university, students, assignments, papers, quizzes, academic, solutions, study materials",
   authors: [{ name: "ZedSolve Team" }],
   openGraph: {
     title: "ZedSolve - Share Your Academic Journey",
-    description: "Access and share academic materials, assignments, and solutions with students worldwide.",
+    description:
+      "Access and share academic materials, assignments, and solutions with students worldwide.",
     type: "website",
   },
 };

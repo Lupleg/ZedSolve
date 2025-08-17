@@ -1,22 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Search, 
-  Filter, 
-  Download, 
-  Eye, 
-  Star, 
+import {
+  Search,
+  Filter,
+  Download,
+  Eye,
+  Star,
   Heart,
   Calendar,
   User,
-  School
+  School,
 } from "lucide-react";
 
 // Mock data - replace with real data from Convex
@@ -24,7 +36,8 @@ const documents = [
   {
     id: 1,
     title: "Advanced Machine Learning - Final Project Report",
-    description: "Comprehensive analysis of deep learning architectures with implementation examples and performance comparisons.",
+    description:
+      "Comprehensive analysis of deep learning architectures with implementation examples and performance comparisons.",
     course: "CS 229",
     university: "Stanford University",
     type: "Assignment",
@@ -37,12 +50,13 @@ const documents = [
     fileSize: "2.4 MB",
     pages: 24,
     tags: ["Machine Learning", "Deep Learning", "Neural Networks"],
-    isPremium: false
+    isPremium: false,
   },
   {
     id: 2,
     title: "Organic Chemistry Lab Report - Synthesis of Aspirin",
-    description: "Detailed lab report covering the synthesis process, yield calculations, and spectroscopic analysis.",
+    description:
+      "Detailed lab report covering the synthesis process, yield calculations, and spectroscopic analysis.",
     course: "CHEM 202",
     university: "MIT",
     type: "Lab Report",
@@ -55,12 +69,13 @@ const documents = [
     fileSize: "1.8 MB",
     pages: 16,
     tags: ["Chemistry", "Lab Report", "Synthesis"],
-    isPremium: false
+    isPremium: false,
   },
   {
     id: 3,
     title: "Calculus III - Vector Fields and Line Integrals Solutions",
-    description: "Step-by-step solutions to complex problems involving vector calculus and multivariable functions.",
+    description:
+      "Step-by-step solutions to complex problems involving vector calculus and multivariable functions.",
     course: "MATH 233",
     university: "Harvard University",
     type: "Solutions",
@@ -73,18 +88,40 @@ const documents = [
     fileSize: "3.1 MB",
     pages: 32,
     tags: ["Mathematics", "Calculus", "Vector Fields"],
-    isPremium: true
-  }
+    isPremium: true,
+  },
 ];
 
-const documentTypes = ["All", "Assignment", "Exam", "Notes", "Lab Report", "Thesis", "Solutions"];
-const universities = ["All Universities", "MIT", "Stanford University", "Harvard University", "UC Berkeley"];
-const subjects = ["All Subjects", "Computer Science", "Mathematics", "Chemistry", "Physics", "Engineering"];
+const documentTypes = [
+  "All",
+  "Assignment",
+  "Exam",
+  "Notes",
+  "Lab Report",
+  "Thesis",
+  "Solutions",
+];
+const universities = [
+  "All Universities",
+  "MIT",
+  "Stanford University",
+  "Harvard University",
+  "UC Berkeley",
+];
+const subjects = [
+  "All Subjects",
+  "Computer Science",
+  "Mathematics",
+  "Chemistry",
+  "Physics",
+  "Engineering",
+];
 
 export default function DocumentsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("All");
-  const [selectedUniversity, setSelectedUniversity] = useState("All Universities");
+  const [selectedUniversity, setSelectedUniversity] =
+    useState("All Universities");
   const [selectedSubject, setSelectedSubject] = useState("All Subjects");
   const [sortBy, setSortBy] = useState("recent");
 
@@ -128,7 +165,10 @@ export default function DocumentsPage() {
             </SelectContent>
           </Select>
 
-          <Select value={selectedUniversity} onValueChange={setSelectedUniversity}>
+          <Select
+            value={selectedUniversity}
+            onValueChange={setSelectedUniversity}
+          >
             <SelectTrigger className="w-[200px]">
               <SelectValue placeholder="University" />
             </SelectTrigger>
@@ -190,7 +230,9 @@ export default function DocumentsPage() {
                   <span className="text-sm">{doc.rating}</span>
                 </div>
               </div>
-              <CardTitle className="text-lg line-clamp-2">{doc.title}</CardTitle>
+              <CardTitle className="text-lg line-clamp-2">
+                {doc.title}
+              </CardTitle>
               <CardDescription className="line-clamp-2">
                 {doc.description}
               </CardDescription>
@@ -200,7 +242,9 @@ export default function DocumentsPage() {
                 {/* Course and University */}
                 <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <School className="h-4 w-4" />
-                  <span>{doc.course} • {doc.university}</span>
+                  <span>
+                    {doc.course} • {doc.university}
+                  </span>
                 </div>
 
                 {/* Author and Date */}
@@ -227,7 +271,9 @@ export default function DocumentsPage() {
                       {doc.likes}
                     </span>
                   </div>
-                  <span>{doc.fileSize} • {doc.pages} pages</span>
+                  <span>
+                    {doc.fileSize} • {doc.pages} pages
+                  </span>
                 </div>
 
                 {/* Tags */}

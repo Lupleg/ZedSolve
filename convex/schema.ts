@@ -15,7 +15,11 @@ export default defineSchema({
     github: v.optional(v.string()),
     linkedin: v.optional(v.string()),
     website: v.optional(v.string()),
-    role: v.union(v.literal("student"), v.literal("instructor"), v.literal("admin")),
+    role: v.union(
+      v.literal("student"),
+      v.literal("instructor"),
+      v.literal("admin")
+    ),
     isVerified: v.boolean(),
     points: v.number(), // Gamification points
     joinedAt: v.number(),
@@ -39,7 +43,11 @@ export default defineSchema({
     universityId: v.id("universities"),
     description: v.optional(v.string()),
     faculty: v.optional(v.string()),
-    level: v.union(v.literal("undergraduate"), v.literal("graduate"), v.literal("postgraduate")),
+    level: v.union(
+      v.literal("undergraduate"),
+      v.literal("graduate"),
+      v.literal("postgraduate")
+    ),
   })
     .index("by_university", ["universityId"])
     .index("by_code", ["code"]),
@@ -241,11 +249,15 @@ export default defineSchema({
     ),
     timeLimit: v.optional(v.number()), // in minutes
     memoryLimit: v.optional(v.number()), // in MB
-    testCases: v.optional(v.array(v.object({
-      input: v.string(),
-      expectedOutput: v.string(),
-      isPublic: v.boolean(),
-    }))),
+    testCases: v.optional(
+      v.array(
+        v.object({
+          input: v.string(),
+          expectedOutput: v.string(),
+          isPublic: v.boolean(),
+        })
+      )
+    ),
     sampleInput: v.optional(v.string()),
     sampleOutput: v.optional(v.string()),
     constraints: v.optional(v.array(v.string())),
@@ -343,10 +355,7 @@ export default defineSchema({
   // Ratings for content
   ratings: defineTable({
     userId: v.id("users"),
-    contentType: v.union(
-      v.literal("solution"),
-      v.literal("tutorial")
-    ),
+    contentType: v.union(v.literal("solution"), v.literal("tutorial")),
     contentId: v.string(),
     rating: v.number(), // 1-5 stars
     review: v.optional(v.string()),

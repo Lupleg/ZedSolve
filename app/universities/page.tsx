@@ -1,19 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  Search, 
-  MapPin, 
-  Users, 
-  FileText, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Search,
+  MapPin,
+  Users,
+  FileText,
   Star,
   Globe,
-  BookOpen
+  BookOpen,
 } from "lucide-react";
 
 // Mock data for universities
@@ -29,39 +41,42 @@ const universities = [
     documentsCount: 15600,
     studentsCount: 2400,
     website: "https://web.mit.edu",
-    description: "Leading research university focusing on science, technology, and innovation.",
+    description:
+      "Leading research university focusing on science, technology, and innovation.",
     topCourses: ["Computer Science", "Engineering", "Physics", "Mathematics"],
-    verified: true
+    verified: true,
   },
   {
     id: 2,
     name: "Stanford University",
     shortName: "Stanford",
-    country: "United States", 
+    country: "United States",
     city: "Stanford, CA",
     logo: "🌲",
     ranking: 2,
     documentsCount: 14200,
     studentsCount: 3200,
     website: "https://stanford.edu",
-    description: "Private research university known for entrepreneurship and innovation.",
+    description:
+      "Private research university known for entrepreneurship and innovation.",
     topCourses: ["Computer Science", "Business", "Engineering", "Medicine"],
-    verified: true
+    verified: true,
   },
   {
     id: 3,
     name: "Harvard University",
     shortName: "Harvard",
     country: "United States",
-    city: "Cambridge, MA", 
+    city: "Cambridge, MA",
     logo: "🍎",
     ranking: 3,
     documentsCount: 18900,
     studentsCount: 4100,
     website: "https://harvard.edu",
-    description: "Ivy League research university with a rich history and academic excellence.",
+    description:
+      "Ivy League research university with a rich history and academic excellence.",
     topCourses: ["Business", "Law", "Medicine", "Liberal Arts"],
-    verified: true
+    verified: true,
   },
   {
     id: 4,
@@ -74,9 +89,15 @@ const universities = [
     documentsCount: 12800,
     studentsCount: 5600,
     website: "https://berkeley.edu",
-    description: "Public research university known for academic excellence and social activism.",
-    topCourses: ["Engineering", "Computer Science", "Business", "Social Sciences"],
-    verified: true
+    description:
+      "Public research university known for academic excellence and social activism.",
+    topCourses: [
+      "Engineering",
+      "Computer Science",
+      "Business",
+      "Social Sciences",
+    ],
+    verified: true,
   },
   {
     id: 5,
@@ -89,9 +110,10 @@ const universities = [
     documentsCount: 11200,
     studentsCount: 3800,
     website: "https://ox.ac.uk",
-    description: "One of the oldest universities in the English-speaking world.",
+    description:
+      "One of the oldest universities in the English-speaking world.",
     topCourses: ["Liberal Arts", "Philosophy", "History", "Medicine"],
-    verified: true
+    verified: true,
   },
   {
     id: 6,
@@ -104,13 +126,17 @@ const universities = [
     documentsCount: 10500,
     studentsCount: 3400,
     website: "https://cam.ac.uk",
-    description: "Prestigious collegiate public research university founded in 1209.",
+    description:
+      "Prestigious collegiate public research university founded in 1209.",
     topCourses: ["Mathematics", "Natural Sciences", "Engineering", "Law"],
-    verified: true
-  }
+    verified: true,
+  },
 ];
 
-const countries = ["All Countries", ...Array.from(new Set(universities.map(u => u.country)))];
+const countries = [
+  "All Countries",
+  ...Array.from(new Set(universities.map((u) => u.country))),
+];
 
 export default function UniversitiesPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -118,11 +144,13 @@ export default function UniversitiesPage() {
   const [sortBy, setSortBy] = useState("ranking");
 
   const filteredUniversities = universities
-    .filter(uni => {
-      const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           uni.shortName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           uni.city.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCountry = selectedCountry === "All Countries" || uni.country === selectedCountry;
+    .filter((uni) => {
+      const matchesSearch =
+        uni.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        uni.shortName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        uni.city.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCountry =
+        selectedCountry === "All Countries" || uni.country === selectedCountry;
       return matchesSearch && matchesCountry;
     })
     .sort((a, b) => {
@@ -202,7 +230,10 @@ export default function UniversitiesPage() {
       {/* Universities Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredUniversities.map((university) => (
-          <Card key={university.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+          <Card
+            key={university.id}
+            className="hover:shadow-lg transition-shadow cursor-pointer"
+          >
             <CardHeader>
               <div className="flex items-start justify-between mb-2">
                 <div className="flex items-center space-x-3">
@@ -221,17 +252,19 @@ export default function UniversitiesPage() {
                   </div>
                 </div>
               </div>
-              
+
               <CardTitle className="text-lg line-clamp-2">
                 {university.name}
               </CardTitle>
-              
+
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>{university.city}, {university.country}</span>
+                <span>
+                  {university.city}, {university.country}
+                </span>
               </div>
             </CardHeader>
-            
+
             <CardContent>
               <CardDescription className="mb-4 line-clamp-2">
                 {university.description}
@@ -245,24 +278,30 @@ export default function UniversitiesPage() {
                     <div className="font-semibold text-sm">
                       {university.documentsCount.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">Documents</div>
+                    <div className="text-xs text-muted-foreground">
+                      Documents
+                    </div>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center space-x-2">
                   <Users className="h-4 w-4 text-green-500" />
                   <div>
                     <div className="font-semibold text-sm">
                       {university.studentsCount.toLocaleString()}
                     </div>
-                    <div className="text-xs text-muted-foreground">Students</div>
+                    <div className="text-xs text-muted-foreground">
+                      Students
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Top Courses */}
               <div className="mb-4">
-                <div className="text-sm font-medium mb-2">Popular Subjects:</div>
+                <div className="text-sm font-medium mb-2">
+                  Popular Subjects:
+                </div>
                 <div className="flex flex-wrap gap-1">
                   {university.topCourses.slice(0, 3).map((course, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
@@ -286,7 +325,11 @@ export default function UniversitiesPage() {
                   </a>
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <a href={university.website} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={university.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <Globe className="h-4 w-4" />
                   </a>
                 </Button>

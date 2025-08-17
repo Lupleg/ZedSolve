@@ -2,42 +2,54 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Upload, 
-  File, 
-  X, 
+import {
+  Upload,
+  File,
+  X,
   AlertCircle,
   CheckCircle,
   BookOpen,
-  GraduationCap
+  GraduationCap,
 } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const documentTypes = [
   "Assignment",
   "Exam",
-  "Quiz", 
+  "Quiz",
   "Notes",
   "Presentation",
   "Thesis",
   "Research Paper",
   "Lab Report",
   "Essay",
-  "Other"
+  "Other",
 ];
 
 const subjects = [
   "Computer Science",
-  "Mathematics", 
+  "Mathematics",
   "Physics",
   "Chemistry",
   "Engineering",
@@ -49,12 +61,12 @@ const subjects = [
   "Literature",
   "Art",
   "Music",
-  "Other"
+  "Other",
 ];
 
 const languages = [
   "English",
-  "Spanish", 
+  "Spanish",
   "French",
   "German",
   "Chinese",
@@ -63,7 +75,7 @@ const languages = [
   "Italian",
   "Russian",
   "Arabic",
-  "Other"
+  "Other",
 ];
 
 export default function UploadPage() {
@@ -88,7 +100,7 @@ export default function UploadPage() {
     tags: [] as string[],
     isPublic: true,
     allowComments: true,
-    allowDownloads: true
+    allowDownloads: true,
   });
 
   const [currentTag, setCurrentTag] = useState("");
@@ -109,40 +121,40 @@ export default function UploadPage() {
     setDragActive(false);
 
     const droppedFiles = Array.from(e.dataTransfer.files);
-    setFiles(prev => [...prev, ...droppedFiles]);
+    setFiles((prev) => [...prev, ...droppedFiles]);
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
-      setFiles(prev => [...prev, ...selectedFiles]);
+      setFiles((prev) => [...prev, ...selectedFiles]);
     }
   };
 
   const removeFile = (index: number) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
+    setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
   const addTag = () => {
     if (currentTag.trim() && !formData.tags.includes(currentTag.trim())) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        tags: [...prev.tags, currentTag.trim()]
+        tags: [...prev.tags, currentTag.trim()],
       }));
       setCurrentTag("");
     }
   };
 
   const removeTag = (tagToRemove: string) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags: prev.tags.filter((tag) => tag !== tagToRemove),
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isSignedIn) {
       alert("Please sign in to upload documents");
       return;
@@ -158,10 +170,10 @@ export default function UploadPage() {
     try {
       // TODO: Implement file upload to UploadThing
       // TODO: Save document metadata to Convex
-      
+
       // Simulate upload
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       setUploadSuccess(true);
       setFiles([]);
       setFormData({
@@ -178,9 +190,8 @@ export default function UploadPage() {
         tags: [],
         isPublic: true,
         allowComments: true,
-        allowDownloads: true
+        allowDownloads: true,
       });
-
     } catch (error) {
       console.error("Upload failed:", error);
     } finally {
@@ -196,7 +207,8 @@ export default function UploadPage() {
             <BookOpen className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
             <CardTitle>Sign In Required</CardTitle>
             <CardDescription>
-              Please sign in to upload and share your documents with the community.
+              Please sign in to upload and share your documents with the
+              community.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -212,7 +224,8 @@ export default function UploadPage() {
             <CheckCircle className="h-12 w-12 mx-auto mb-4 text-green-500" />
             <CardTitle>Upload Successful!</CardTitle>
             <CardDescription>
-              Your document has been uploaded and is being reviewed. You'll be notified once it's approved.
+              Your document has been uploaded and is being reviewed. You'll be
+              notified once it's approved.
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
@@ -231,7 +244,8 @@ export default function UploadPage() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Upload Document</h1>
           <p className="text-muted-foreground">
-            Share your academic materials with students worldwide and help others learn
+            Share your academic materials with students worldwide and help
+            others learn
           </p>
         </div>
 
@@ -247,7 +261,9 @@ export default function UploadPage() {
             <CardContent>
               <div
                 className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
-                  dragActive ? "border-primary bg-primary/10" : "border-muted-foreground/25"
+                  dragActive
+                    ? "border-primary bg-primary/10"
+                    : "border-muted-foreground/25"
                 }`}
                 onDragEnter={handleDrag}
                 onDragLeave={handleDrag}
@@ -255,7 +271,9 @@ export default function UploadPage() {
                 onDrop={handleDrop}
               >
                 <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-                <p className="text-lg font-medium mb-2">Drop files here or click to browse</p>
+                <p className="text-lg font-medium mb-2">
+                  Drop files here or click to browse
+                </p>
                 <p className="text-muted-foreground mb-4">
                   You can upload multiple files at once
                 </p>
@@ -278,7 +296,10 @@ export default function UploadPage() {
                 <div className="mt-4 space-y-2">
                   <Label>Selected Files:</Label>
                   {files.map((file, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 border rounded-lg"
+                    >
                       <div className="flex items-center space-x-3">
                         <File className="h-5 w-5" />
                         <div>
@@ -319,17 +340,24 @@ export default function UploadPage() {
                     id="title"
                     required
                     value={formData.title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        title: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., Data Structures Final Exam Solutions"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="documentType">Document Type *</Label>
-                  <Select 
+                  <Select
                     required
-                    value={formData.documentType} 
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, documentType: value }))}
+                    value={formData.documentType}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, documentType: value }))
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select type" />
@@ -350,7 +378,12 @@ export default function UploadPage() {
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   placeholder="Briefly describe the content and what makes it valuable..."
                   rows={3}
                 />
@@ -359,10 +392,12 @@ export default function UploadPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject *</Label>
-                  <Select 
+                  <Select
                     required
-                    value={formData.subject} 
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
+                    value={formData.subject}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, subject: value }))
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select subject" />
@@ -382,7 +417,12 @@ export default function UploadPage() {
                   <Input
                     id="course"
                     value={formData.course}
-                    onChange={(e) => setFormData(prev => ({ ...prev, course: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        course: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., CS 101, MATH 152"
                   />
                 </div>
@@ -394,7 +434,12 @@ export default function UploadPage() {
                   <Input
                     id="university"
                     value={formData.university}
-                    onChange={(e) => setFormData(prev => ({ ...prev, university: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        university: e.target.value,
+                      }))
+                    }
                     placeholder="Your university name"
                   />
                 </div>
@@ -404,7 +449,12 @@ export default function UploadPage() {
                   <Input
                     id="professor"
                     value={formData.professor}
-                    onChange={(e) => setFormData(prev => ({ ...prev, professor: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        professor: e.target.value,
+                      }))
+                    }
                     placeholder="Professor name (optional)"
                   />
                 </div>
@@ -416,7 +466,12 @@ export default function UploadPage() {
                   <Input
                     id="semester"
                     value={formData.semester}
-                    onChange={(e) => setFormData(prev => ({ ...prev, semester: e.target.value }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        semester: e.target.value,
+                      }))
+                    }
                     placeholder="e.g., Fall 2024"
                   />
                 </div>
@@ -427,7 +482,12 @@ export default function UploadPage() {
                     id="year"
                     type="number"
                     value={formData.year}
-                    onChange={(e) => setFormData(prev => ({ ...prev, year: parseInt(e.target.value) }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        year: parseInt(e.target.value),
+                      }))
+                    }
                     min="2000"
                     max="2030"
                   />
@@ -435,9 +495,11 @@ export default function UploadPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="language">Language</Label>
-                  <Select 
-                    value={formData.language} 
-                    onValueChange={(value) => setFormData(prev => ({ ...prev, language: value }))}
+                  <Select
+                    value={formData.language}
+                    onValueChange={(value) =>
+                      setFormData((prev) => ({ ...prev, language: value }))
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue />
@@ -461,7 +523,9 @@ export default function UploadPage() {
                     value={currentTag}
                     onChange={(e) => setCurrentTag(e.target.value)}
                     placeholder="Add a tag..."
-                    onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
+                    onKeyPress={(e) =>
+                      e.key === "Enter" && (e.preventDefault(), addTag())
+                    }
                   />
                   <Button type="button" variant="outline" onClick={addTag}>
                     Add
@@ -470,7 +534,11 @@ export default function UploadPage() {
                 {formData.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
                     {formData.tags.map((tag, index) => (
-                      <Badge key={index} variant="secondary" className="px-3 py-1">
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="px-3 py-1"
+                      >
                         {tag}
                         <button
                           type="button"
@@ -500,8 +568,11 @@ export default function UploadPage() {
                 <Checkbox
                   id="isPublic"
                   checked={formData.isPublic}
-                  onCheckedChange={(checked) => 
-                    setFormData(prev => ({ ...prev, isPublic: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      isPublic: checked as boolean,
+                    }))
                   }
                 />
                 <Label htmlFor="isPublic">Make this document public</Label>
@@ -511,19 +582,27 @@ export default function UploadPage() {
                 <Checkbox
                   id="allowComments"
                   checked={formData.allowComments}
-                  onCheckedChange={(checked) => 
-                    setFormData(prev => ({ ...prev, allowComments: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      allowComments: checked as boolean,
+                    }))
                   }
                 />
-                <Label htmlFor="allowComments">Allow comments and feedback</Label>
+                <Label htmlFor="allowComments">
+                  Allow comments and feedback
+                </Label>
               </div>
 
               <div className="flex items-center space-x-2">
                 <Checkbox
                   id="allowDownloads"
                   checked={formData.allowDownloads}
-                  onCheckedChange={(checked) => 
-                    setFormData(prev => ({ ...prev, allowDownloads: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      allowDownloads: checked as boolean,
+                    }))
                   }
                 />
                 <Label htmlFor="allowDownloads">Allow downloads</Label>
@@ -534,7 +613,8 @@ export default function UploadPage() {
           <Alert>
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>
-              By uploading, you confirm that you have the right to share this content and that it complies with our community guidelines.
+              By uploading, you confirm that you have the right to share this
+              content and that it complies with our community guidelines.
             </AlertDescription>
           </Alert>
 

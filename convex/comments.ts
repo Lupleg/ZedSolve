@@ -10,7 +10,7 @@ export const getComments = query({
   handler: async (ctx, args) => {
     const comments = await ctx.db
       .query("comments")
-      .filter((q) => 
+      .filter((q) =>
         q.and(
           q.eq(q.field("contentType"), args.contentType),
           q.eq(q.field("contentId"), args.contentId),
@@ -107,7 +107,7 @@ export const toggleCommentLike = mutation({
 
     const existingLike = await ctx.db
       .query("interactions")
-      .filter((q) => 
+      .filter((q) =>
         q.and(
           q.eq(q.field("userId"), user._id),
           q.eq(q.field("contentId"), args.commentId),

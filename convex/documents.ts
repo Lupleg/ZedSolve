@@ -12,18 +12,16 @@ export const getDocuments = query({
   },
   handler: async (ctx, args) => {
     let query = ctx.db.query("documents");
-    
+
     // Apply filters
     if (args.type && args.type !== "All") {
       query = query.filter((q) => q.eq(q.field("documentType"), args.type));
     }
-    
+
     // Add search functionality here if needed
-    
-    const documents = await query
-      .order("desc")
-      .take(args.limit || 20);
-    
+
+    const documents = await query.order("desc").take(args.limit || 20);
+
     return documents;
   },
 });
@@ -34,7 +32,7 @@ export const getDocument = query({
   handler: async (ctx, args) => {
     const document = await ctx.db.get(args.id);
     if (!document) return null;
-    
+
     // Note: In a real app, you'd want to track views differently
     // This is just for demo purposes
     return document;
@@ -147,7 +145,7 @@ export const toggleLike = mutation({
     // Check if user already liked this document
     const existingLike = await ctx.db
       .query("interactions")
-      .filter((q) => 
+      .filter((q) =>
         q.and(
           q.eq(q.field("userId"), user._id),
           q.eq(q.field("contentId"), args.documentId),

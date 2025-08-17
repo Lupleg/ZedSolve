@@ -2,19 +2,25 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Download, 
-  Eye, 
-  Heart, 
-  Star, 
-  Share2, 
+import {
+  Download,
+  Eye,
+  Heart,
+  Star,
+  Share2,
   MessageCircle,
   ThumbsUp,
   ThumbsDown,
@@ -23,14 +29,15 @@ import {
   School,
   BookOpen,
   FileText,
-  Flag
+  Flag,
 } from "lucide-react";
 
 // Mock document data
 const document = {
   id: 1,
   title: "Advanced Machine Learning - Final Project Report",
-  description: "Comprehensive analysis of deep learning architectures with implementation examples and performance comparisons. This report covers various neural network architectures including CNNs, RNNs, and Transformers with practical applications in computer vision and natural language processing.",
+  description:
+    "Comprehensive analysis of deep learning architectures with implementation examples and performance comparisons. This report covers various neural network architectures including CNNs, RNNs, and Transformers with practical applications in computer vision and natural language processing.",
   content: `# Advanced Machine Learning Final Project Report
 
 ## Abstract
@@ -55,7 +62,7 @@ Our experiments show that...`,
     name: "Sarah Chen",
     avatar: "",
     university: "Stanford University",
-    year: 3
+    year: 3,
   },
   rating: 4.8,
   downloads: 1240,
@@ -71,19 +78,20 @@ Our experiments show that...`,
   year: 2023,
   professor: "Dr. Andrew Ng",
   grade: "A+",
-  language: "English"
+  language: "English",
 };
 
 // Mock comments data
 const initialComments = [
   {
     id: 1,
-    content: "This is an excellent report! The methodology section is particularly well-written and the results are clearly presented. Thanks for sharing!",
+    content:
+      "This is an excellent report! The methodology section is particularly well-written and the results are clearly presented. Thanks for sharing!",
     author: {
       id: 2,
       name: "Alex Rodriguez",
       avatar: "",
-      university: "MIT"
+      university: "MIT",
     },
     createdAt: "2024-01-20",
     likes: 12,
@@ -96,28 +104,29 @@ const initialComments = [
           id: 3,
           name: "Emily Johnson",
           avatar: "",
-          university: "Harvard"
+          university: "Harvard",
         },
         createdAt: "2024-01-21",
         likes: 5,
-        dislikes: 0
-      }
-    ]
+        dislikes: 0,
+      },
+    ],
   },
   {
     id: 3,
-    content: "Great work on the transformer section. Could you share more details about the hyperparameter tuning process?",
+    content:
+      "Great work on the transformer section. Could you share more details about the hyperparameter tuning process?",
     author: {
       id: 4,
       name: "Michael Wang",
       avatar: "",
-      university: "UC Berkeley"
+      university: "UC Berkeley",
     },
     createdAt: "2024-01-22",
     likes: 8,
     dislikes: 1,
-    replies: []
-  }
+    replies: [],
+  },
 ];
 
 export default function DocumentDetailPage() {
@@ -148,12 +157,12 @@ export default function DocumentDetailPage() {
         id: 999,
         name: user?.fullName || "Current User",
         avatar: user?.imageUrl || "",
-        university: "Your University"
+        university: "Your University",
       },
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: new Date().toISOString().split("T")[0],
       likes: 0,
       dislikes: 0,
-      replies: []
+      replies: [],
     };
 
     setComments([comment, ...comments]);
@@ -171,18 +180,20 @@ export default function DocumentDetailPage() {
         id: 999,
         name: user?.fullName || "Current User",
         avatar: user?.imageUrl || "",
-        university: "Your University"
+        university: "Your University",
       },
-      createdAt: new Date().toISOString().split('T')[0],
+      createdAt: new Date().toISOString().split("T")[0],
       likes: 0,
-      dislikes: 0
+      dislikes: 0,
     };
 
-    setComments(comments.map(comment => 
-      comment.id === commentId 
-        ? { ...comment, replies: [...comment.replies, reply] }
-        : comment
-    ));
+    setComments(
+      comments.map((comment) =>
+        comment.id === commentId
+          ? { ...comment, replies: [...comment.replies, reply] }
+          : comment
+      )
+    );
     setReplyContent("");
     setReplyingTo(null);
   };
@@ -202,18 +213,24 @@ export default function DocumentDetailPage() {
               <div className="flex items-center space-x-1">
                 <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                 <span className="font-medium">{document.rating}</span>
-                <span className="text-muted-foreground text-sm">(24 reviews)</span>
+                <span className="text-muted-foreground text-sm">
+                  (24 reviews)
+                </span>
               </div>
             </div>
 
             <CardTitle className="text-2xl mb-2">{document.title}</CardTitle>
-            <CardDescription className="text-base">{document.description}</CardDescription>
+            <CardDescription className="text-base">
+              {document.description}
+            </CardDescription>
 
             {/* Course and University Info */}
             <div className="flex flex-wrap gap-4 mt-4 text-sm text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <School className="h-4 w-4" />
-                <span>{document.course} • {document.university}</span>
+                <span>
+                  {document.course} • {document.university}
+                </span>
               </div>
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4" />
@@ -221,7 +238,9 @@ export default function DocumentDetailPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar className="h-4 w-4" />
-                <span>{document.semester} {document.year}</span>
+                <span>
+                  {document.semester} {document.year}
+                </span>
               </div>
               {document.grade && (
                 <div className="flex items-center space-x-2">
@@ -259,7 +278,8 @@ export default function DocumentDetailPage() {
                 </span>
               </div>
               <div className="text-sm text-muted-foreground">
-                {document.fileSize} • {document.pages} pages • {document.language}
+                {document.fileSize} • {document.pages} pages •{" "}
+                {document.language}
               </div>
             </div>
 
@@ -269,20 +289,30 @@ export default function DocumentDetailPage() {
                 <Download className="h-4 w-4 mr-2" />
                 Download PDF
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={handleLike}
-                className={isLiked ? "bg-red-50 border-red-200 text-red-600" : ""}
+                className={
+                  isLiked ? "bg-red-50 border-red-200 text-red-600" : ""
+                }
               >
-                <Heart className={`h-4 w-4 mr-2 ${isLiked ? "fill-current" : ""}`} />
+                <Heart
+                  className={`h-4 w-4 mr-2 ${isLiked ? "fill-current" : ""}`}
+                />
                 {isLiked ? "Liked" : "Like"}
               </Button>
-              <Button 
+              <Button
                 variant="outline"
                 onClick={handleBookmark}
-                className={isBookmarked ? "bg-blue-50 border-blue-200 text-blue-600" : ""}
+                className={
+                  isBookmarked ? "bg-blue-50 border-blue-200 text-blue-600" : ""
+                }
               >
-                <BookOpen className={`h-4 w-4 mr-2 ${isBookmarked ? "fill-current" : ""}`} />
+                <BookOpen
+                  className={`h-4 w-4 mr-2 ${
+                    isBookmarked ? "fill-current" : ""
+                  }`}
+                />
                 {isBookmarked ? "Saved" : "Save"}
               </Button>
               <Button variant="outline">
@@ -310,10 +340,12 @@ export default function DocumentDetailPage() {
               <div className="flex-1">
                 <div className="font-medium">{document.author.name}</div>
                 <div className="text-sm text-muted-foreground">
-                  Year {document.author.year} Student at {document.author.university}
+                  Year {document.author.year} Student at{" "}
+                  {document.author.university}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  Uploaded on {new Date(document.uploadDate).toLocaleDateString()}
+                  Uploaded on{" "}
+                  {new Date(document.uploadDate).toLocaleDateString()}
                 </div>
               </div>
               <Button variant="outline" size="sm">
@@ -335,7 +367,8 @@ export default function DocumentDetailPage() {
               </div>
               <div className="mt-4 pt-4 border-t text-center">
                 <p className="text-muted-foreground mb-4">
-                  This is a preview. Download the full document to see all {document.pages} pages.
+                  This is a preview. Download the full document to see all{" "}
+                  {document.pages} pages.
                 </p>
                 <Button>
                   <Download className="h-4 w-4 mr-2" />
@@ -351,11 +384,16 @@ export default function DocumentDetailPage() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle className="text-lg">
-                Comments ({comments.reduce((total, comment) => total + 1 + comment.replies.length, 0)})
+                Comments (
+                {comments.reduce(
+                  (total, comment) => total + 1 + comment.replies.length,
+                  0
+                )}
+                )
               </CardTitle>
               {isSignedIn && (
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => setShowCommentForm(!showCommentForm)}
                 >
@@ -376,8 +414,8 @@ export default function DocumentDetailPage() {
                   className="mb-3"
                 />
                 <div className="flex justify-end space-x-2">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
                     onClick={() => setShowCommentForm(false)}
                   >
@@ -401,7 +439,9 @@ export default function DocumentDetailPage() {
                     </Avatar>
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
-                        <span className="font-medium text-sm">{comment.author.name}</span>
+                        <span className="font-medium text-sm">
+                          {comment.author.name}
+                        </span>
                         <span className="text-xs text-muted-foreground">
                           {comment.author.university}
                         </span>
@@ -421,9 +461,9 @@ export default function DocumentDetailPage() {
                           {comment.dislikes}
                         </Button>
                         {isSignedIn && (
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             className="h-6 px-2"
                             onClick={() => setReplyingTo(comment.id)}
                           >
@@ -439,26 +479,40 @@ export default function DocumentDetailPage() {
                     <div key={reply.id} className="ml-12 flex space-x-4">
                       <Avatar className="h-6 w-6">
                         <AvatarImage src={reply.author.avatar} />
-                        <AvatarFallback className="text-xs">{reply.author.name[0]}</AvatarFallback>
+                        <AvatarFallback className="text-xs">
+                          {reply.author.name[0]}
+                        </AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
                         <div className="flex items-center space-x-2 mb-1">
-                          <span className="font-medium text-sm">{reply.author.name}</span>
+                          <span className="font-medium text-sm">
+                            {reply.author.name}
+                          </span>
                           <span className="text-xs text-muted-foreground">
                             {reply.author.university}
                           </span>
-                          <span className="text-xs text-muted-foreground">•</span>
+                          <span className="text-xs text-muted-foreground">
+                            •
+                          </span>
                           <span className="text-xs text-muted-foreground">
                             {new Date(reply.createdAt).toLocaleDateString()}
                           </span>
                         </div>
                         <p className="text-sm mb-2">{reply.content}</p>
                         <div className="flex items-center space-x-4">
-                          <Button variant="ghost" size="sm" className="h-6 px-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 px-2"
+                          >
                             <ThumbsUp className="h-3 w-3 mr-1" />
                             {reply.likes}
                           </Button>
-                          <Button variant="ghost" size="sm" className="h-6 px-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-6 px-2"
+                          >
                             <ThumbsDown className="h-3 w-3 mr-1" />
                             {reply.dislikes}
                           </Button>
@@ -478,14 +532,17 @@ export default function DocumentDetailPage() {
                         rows={2}
                       />
                       <div className="flex justify-end space-x-2">
-                        <Button 
-                          variant="outline" 
+                        <Button
+                          variant="outline"
                           size="sm"
                           onClick={() => setReplyingTo(null)}
                         >
                           Cancel
                         </Button>
-                        <Button size="sm" onClick={() => handleReply(comment.id)}>
+                        <Button
+                          size="sm"
+                          onClick={() => handleReply(comment.id)}
+                        >
                           Reply
                         </Button>
                       </div>

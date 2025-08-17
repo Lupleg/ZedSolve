@@ -4,19 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Search, 
-  BookOpen, 
-  Users, 
-  FileText, 
+import {
+  Search,
+  BookOpen,
+  Users,
+  FileText,
   TrendingUp,
   GraduationCap,
   Upload,
   Star,
   Download,
-  Eye
+  Eye,
 } from "lucide-react";
 
 const featuredCategories = [
@@ -24,38 +30,38 @@ const featuredCategories = [
     name: "Computer Science",
     icon: "💻",
     count: "12,500+ documents",
-    color: "bg-blue-100 text-blue-800"
+    color: "bg-blue-100 text-blue-800",
   },
   {
     name: "Mathematics",
     icon: "📐",
     count: "8,200+ documents",
-    color: "bg-green-100 text-green-800"
+    color: "bg-green-100 text-green-800",
   },
   {
     name: "Engineering",
     icon: "⚙️",
     count: "15,600+ documents",
-    color: "bg-purple-100 text-purple-800"
+    color: "bg-purple-100 text-purple-800",
   },
   {
     name: "Business",
     icon: "📊",
     count: "9,800+ documents",
-    color: "bg-orange-100 text-orange-800"
+    color: "bg-orange-100 text-orange-800",
   },
   {
     name: "Physics",
     icon: "🔬",
     count: "6,400+ documents",
-    color: "bg-red-100 text-red-800"
+    color: "bg-red-100 text-red-800",
   },
   {
     name: "Chemistry",
     icon: "🧪",
     count: "7,200+ documents",
-    color: "bg-teal-100 text-teal-800"
-  }
+    color: "bg-teal-100 text-teal-800",
+  },
 ];
 
 const recentDocuments = [
@@ -69,19 +75,19 @@ const recentDocuments = [
     downloads: 1240,
     views: 5680,
     uploadedBy: "Sarah Chen",
-    uploadedAt: "2 days ago"
+    uploadedAt: "2 days ago",
   },
   {
     id: 2,
     title: "Machine Learning Assignment 3 - Neural Networks",
     course: "CS 229",
     university: "Stanford",
-    type: "Assignment", 
+    type: "Assignment",
     rating: 4.9,
     downloads: 890,
     views: 3240,
     uploadedBy: "Alex Rodriguez",
-    uploadedAt: "1 week ago"
+    uploadedAt: "1 week ago",
   },
   {
     id: 3,
@@ -93,8 +99,8 @@ const recentDocuments = [
     downloads: 2100,
     views: 8900,
     uploadedBy: "Emily Johnson",
-    uploadedAt: "3 days ago"
-  }
+    uploadedAt: "3 days ago",
+  },
 ];
 
 const stats = [
@@ -116,9 +122,10 @@ export default function Home() {
             Share Your Academic Journey
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Join millions of students sharing assignments, exams, notes, and academic solutions worldwide
+            Join millions of students sharing assignments, exams, notes, and
+            academic solutions worldwide
           </p>
-          
+
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
@@ -129,9 +136,7 @@ export default function Home() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button className="absolute right-2 top-2 h-10">
-                Search
-              </Button>
+              <Button className="absolute right-2 top-2 h-10">Search</Button>
             </div>
           </div>
 
@@ -161,7 +166,9 @@ export default function Home() {
                 <div className="flex justify-center mb-2">
                   <stat.icon className="h-8 w-8 text-primary" />
                 </div>
-                <div className="text-2xl md:text-3xl font-bold mb-1">{stat.value}</div>
+                <div className="text-2xl md:text-3xl font-bold mb-1">
+                  {stat.value}
+                </div>
                 <div className="text-muted-foreground">{stat.label}</div>
               </div>
             ))}
@@ -172,10 +179,15 @@ export default function Home() {
       {/* Featured Categories */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Popular Study Areas</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Popular Study Areas
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCategories.map((category, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
+              <Card
+                key={index}
+                className="hover:shadow-lg transition-shadow cursor-pointer"
+              >
                 <CardHeader className="pb-3">
                   <div className="flex items-center space-x-3">
                     <div className="text-2xl">{category.icon}</div>
@@ -203,7 +215,7 @@ export default function Home() {
               </Link>
             </Button>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recentDocuments.map((doc) => (
               <Card key={doc.id} className="hover:shadow-lg transition-shadow">
@@ -215,7 +227,9 @@ export default function Home() {
                       <span className="text-sm">{doc.rating}</span>
                     </div>
                   </div>
-                  <CardTitle className="text-lg line-clamp-2">{doc.title}</CardTitle>
+                  <CardTitle className="text-lg line-clamp-2">
+                    {doc.title}
+                  </CardTitle>
                   <CardDescription>
                     {doc.course} • {doc.university}
                   </CardDescription>
@@ -250,7 +264,8 @@ export default function Home() {
             Start Sharing Your Knowledge Today
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Join our community of students helping each other succeed. Upload your documents and earn points while helping others learn.
+            Join our community of students helping each other succeed. Upload
+            your documents and earn points while helping others learn.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary">
@@ -258,7 +273,11 @@ export default function Home() {
                 Get Started Free
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+            >
               <Link href="/about" className="flex items-center">
                 Learn More
               </Link>

@@ -1,17 +1,23 @@
 import { UserButton } from "@clerk/nextjs";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { 
-  User, 
-  FileText, 
-  Download, 
-  Heart, 
+import {
+  User,
+  FileText,
+  Download,
+  Heart,
   Calendar,
   Award,
   Settings,
-  Upload
+  Upload,
 } from "lucide-react";
 
 export default function ProfilePage() {
@@ -30,8 +36,8 @@ export default function ProfilePage() {
       documentsUploaded: 24,
       totalDownloads: 5680,
       totalLikes: 342,
-      commentsReceived: 89
-    }
+      commentsReceived: 89,
+    },
   };
 
   const recentDocuments = [
@@ -42,7 +48,7 @@ export default function ProfilePage() {
       course: "CS 229",
       uploads: 1240,
       likes: 89,
-      date: "2024-01-15"
+      date: "2024-01-15",
     },
     {
       id: 2,
@@ -51,8 +57,8 @@ export default function ProfilePage() {
       course: "CS 106B",
       uploads: 890,
       likes: 67,
-      date: "2024-01-10"
-    }
+      date: "2024-01-10",
+    },
   ];
 
   return (
@@ -63,11 +69,11 @@ export default function ProfilePage() {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-6">
-                <UserButton 
+                <UserButton
                   appearance={{
                     elements: {
-                      avatarBox: "w-20 h-20"
-                    }
+                      avatarBox: "w-20 h-20",
+                    },
                   }}
                 />
                 <div>
@@ -75,9 +81,12 @@ export default function ProfilePage() {
                     <h1 className="text-2xl font-bold">{userProfile.name}</h1>
                     <Badge variant="default">{userProfile.badge}</Badge>
                   </div>
-                  <p className="text-muted-foreground mb-1">{userProfile.email}</p>
+                  <p className="text-muted-foreground mb-1">
+                    {userProfile.email}
+                  </p>
                   <p className="text-muted-foreground mb-2">
-                    Year {userProfile.year} {userProfile.course} at {userProfile.university}
+                    Year {userProfile.year} {userProfile.course} at{" "}
+                    {userProfile.university}
                   </p>
                   <div className="flex items-center text-sm text-muted-foreground">
                     <Calendar className="h-4 w-4 mr-1" />
@@ -108,31 +117,39 @@ export default function ProfilePage() {
           <Card>
             <CardContent className="p-4 text-center">
               <FileText className="h-6 w-6 mx-auto mb-2 text-blue-500" />
-              <div className="text-2xl font-bold">{userProfile.stats.documentsUploaded}</div>
+              <div className="text-2xl font-bold">
+                {userProfile.stats.documentsUploaded}
+              </div>
               <div className="text-sm text-muted-foreground">Documents</div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardContent className="p-4 text-center">
               <Download className="h-6 w-6 mx-auto mb-2 text-green-500" />
-              <div className="text-2xl font-bold">{userProfile.stats.totalDownloads.toLocaleString()}</div>
+              <div className="text-2xl font-bold">
+                {userProfile.stats.totalDownloads.toLocaleString()}
+              </div>
               <div className="text-sm text-muted-foreground">Downloads</div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardContent className="p-4 text-center">
               <Heart className="h-6 w-6 mx-auto mb-2 text-red-500" />
-              <div className="text-2xl font-bold">{userProfile.stats.totalLikes}</div>
+              <div className="text-2xl font-bold">
+                {userProfile.stats.totalLikes}
+              </div>
               <div className="text-sm text-muted-foreground">Likes</div>
             </CardContent>
           </Card>
-          
+
           <Card>
             <CardContent className="p-4 text-center">
               <User className="h-6 w-6 mx-auto mb-2 text-purple-500" />
-              <div className="text-2xl font-bold">{userProfile.stats.commentsReceived}</div>
+              <div className="text-2xl font-bold">
+                {userProfile.stats.commentsReceived}
+              </div>
               <div className="text-sm text-muted-foreground">Comments</div>
             </CardContent>
           </Card>
@@ -157,9 +174,13 @@ export default function ProfilePage() {
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-1">
                         <h3 className="font-medium">{doc.title}</h3>
-                        <Badge variant="outline" className="text-xs">{doc.type}</Badge>
+                        <Badge variant="outline" className="text-xs">
+                          {doc.type}
+                        </Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground">{doc.course}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {doc.course}
+                      </p>
                     </div>
                     <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                       <span className="flex items-center">
@@ -173,7 +194,9 @@ export default function ProfilePage() {
                       <span>{new Date(doc.date).toLocaleDateString()}</span>
                     </div>
                   </div>
-                  {index < recentDocuments.length - 1 && <Separator className="mt-4" />}
+                  {index < recentDocuments.length - 1 && (
+                    <Separator className="mt-4" />
+                  )}
                 </div>
               ))}
             </div>

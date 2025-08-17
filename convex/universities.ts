@@ -10,20 +10,20 @@ export const getUniversities = query({
   },
   handler: async (ctx, args) => {
     let query = ctx.db.query("universities");
-    
+
     if (args.country && args.country !== "All Countries") {
       query = query.filter((q) => q.eq(q.field("country"), args.country));
     }
-    
+
     const universities = await query.take(args.limit || 50);
-    
+
     // Filter by search if provided
     if (args.search) {
-      return universities.filter(uni => 
+      return universities.filter((uni) =>
         uni.name.toLowerCase().includes(args.search!.toLowerCase())
       );
     }
-    
+
     return universities;
   },
 });
@@ -76,7 +76,11 @@ export const createCourse = mutation({
     universityId: v.id("universities"),
     description: v.optional(v.string()),
     faculty: v.optional(v.string()),
-    level: v.union(v.literal("undergraduate"), v.literal("graduate"), v.literal("postgraduate")),
+    level: v.union(
+      v.literal("undergraduate"),
+      v.literal("graduate"),
+      v.literal("postgraduate")
+    ),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

@@ -62,15 +62,18 @@ export const getUserProfile = query({
       .query("documents")
       .filter((q) => q.eq(q.field("authorId"), args.userId))
       .collect()
-      .then(docs => docs.length);
+      .then((docs) => docs.length);
 
     // Get user's total downloads
     const documents = await ctx.db
       .query("documents")
       .filter((q) => q.eq(q.field("authorId"), args.userId))
       .collect();
-    
-    const totalDownloads = documents.reduce((sum, doc) => sum + doc.downloadCount, 0);
+
+    const totalDownloads = documents.reduce(
+      (sum, doc) => sum + doc.downloadCount,
+      0
+    );
 
     return {
       ...user,

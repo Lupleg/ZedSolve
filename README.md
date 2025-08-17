@@ -5,6 +5,7 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 ## Features
 
 ### 🎓 For Students
+
 - **Browse & Download**: Access thousands of documents from universities globally
 - **Upload & Share**: Share your assignments, notes, and study materials
 - **Community Interaction**: Comment, like, and rate documents
@@ -12,8 +13,9 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 - **Search & Filter**: Find exactly what you need with advanced filtering
 
 ### 📚 Document Types Supported
+
 - Assignments & Homework
-- Exams & Quizzes  
+- Exams & Quizzes
 - Lecture Notes
 - Lab Reports
 - Research Papers
@@ -21,6 +23,7 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 - Thesis Documents
 
 ### 🔐 User Features
+
 - **Guest Access**: Browse and view documents without signing up
 - **Member Benefits**: Upload, comment, like, and bookmark content
 - **University Verification**: Verified profiles for authentic academic content
@@ -37,50 +40,57 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18+ and pnpm
 - Convex account
-- Clerk account  
+- Clerk account
 - UploadThing account
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/yourusername/zedsolve.git
    cd zedsolve
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env.local
    ```
-   
+
    Fill in your environment variables:
+
    ```env
    # Convex
    CONVEX_DEPLOYMENT=your-convex-deployment
    NEXT_PUBLIC_CONVEX_URL=https://your-convex-url
-   
-   # Clerk Authentication  
+
+   # Clerk Authentication
    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
    CLERK_SECRET_KEY=sk_test_...
-   
+
    # UploadThing
    UPLOADTHING_SECRET=sk_live_...
    UPLOADTHING_APP_ID=your-app-id
    ```
 
 4. **Set up Convex**
+
    ```bash
    npx convex dev
    ```
 
 5. **Run the development server**
+
    ```bash
    pnpm dev
    ```
@@ -93,7 +103,7 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 ```
 ├── app/                    # Next.js app directory
 │   ├── documents/         # Document browsing & detail pages
-│   ├── universities/      # University pages  
+│   ├── universities/      # University pages
 │   ├── upload/           # Document upload page
 │   └── page.tsx          # Homepage
 ├── components/           # Reusable UI components
@@ -111,23 +121,27 @@ A StudoCu-inspired platform where students can upload, share, and discover acade
 ## Key Features Implementation
 
 ### 🔍 Document Discovery
+
 - Advanced search with filters by type, university, subject
 - Featured documents and trending content
 - University-specific document collections
 
 ### 📤 Document Upload
+
 - Drag & drop file upload with UploadThing
-- Rich metadata for better discoverability  
+- Rich metadata for better discoverability
 - Document preview and validation
 - Privacy controls and permissions
 
-### 👥 Community Features  
+### 👥 Community Features
+
 - Commenting system with threading
 - Like/dislike voting on documents and comments
 - User profiles with contribution history
 - Follow system for content creators
 
 ### 🏛️ University Integration
+
 - University verification system
 - Course and department organization
 - Academic year and semester tracking
@@ -139,7 +153,7 @@ The app uses Convex with the following main collections:
 
 - **users**: Student profiles and authentication
 - **universities**: Academic institutions
-- **courses**: University courses and programs  
+- **courses**: University courses and programs
 - **documents**: Uploaded academic materials
 - **comments**: Community discussions
 - **interactions**: Likes, bookmarks, and views
@@ -158,6 +172,7 @@ The app uses Convex with the following main collections:
 ### Vercel (Recommended)
 
 1. **Deploy to Vercel**
+
    ```bash
    vercel
    ```
