@@ -4,6 +4,7 @@ import { v } from "convex/values";
 export default defineSchema({
   // Users table
   users: defineTable({
+    clerkId: v.string(), // Clerk authentication ID
     name: v.string(),
     email: v.string(),
     avatar: v.optional(v.string()),
@@ -16,8 +17,87 @@ export default defineSchema({
     website: v.optional(v.string()),
     role: v.union(v.literal("student"), v.literal("instructor"), v.literal("admin")),
     isVerified: v.boolean(),
+    points: v.number(), // Gamification points
     joinedAt: v.number(),
-  }).index("by_email", ["email"]),
+  })
+    .index("by_email", ["email"])
+    .index("by_clerk_id", ["clerkId"]),
+
+  // Universities table
+  universities: defineTable({
+    name: v.string(),
+    country: v.string(),
+    website: v.optional(v.string()),
+    logo: v.optional(v.string()),
+    isVerified: v.boolean(),
+  }),
+
+  // Courses table
+  courses: defineTable({
+    name: v.string(),
+    code: v.string(),
+    universityId: v.id("universities"),
+    description: v.optional(v.string()),
+    faculty: v.optional(v.string()),
+    level: v.union(v.literal("undergraduate"), v.literal("graduate"), v.literal("postgraduate")),
+  })
+    .index("by_university", ["universityId"])
+    .index("by_code", ["code"]),
+
+  // Documents/Papers (main content type for StudoCu-like functionality)
+  documents: defineTable({
+    title: v.string(),
+    description: v.string(),
+    content: v.optional(v.string()), // Text content for preview
+    authorId: v.id("users"),
+    universityId: v.id("universities"),
+    courseId: v.id("courses"),
+    categoryId: v.id("categories"),
+    tags: v.array(v.id("tags")),
+    documentType: v.union(
+      v.literal("assignment"),
+      v.literal("exam"),
+      v.literal("quiz"),
+      v.literal("notes"),
+      v.literal("presentation"),
+      v.literal("thesis"),
+      v.literal("research_paper"),
+      v.literal("lab_report"),
+      v.literal("essay"),
+      v.literal("other")
+    ),
+    fileUrl: v.string(), // URL to the uploaded file
+    fileName: v.string(),
+    fileSize: v.number(),
+    fileType: v.string(), // pdf, docx, pptx, etc.
+    pageCount: v.optional(v.number()),
+    semester: v.optional(v.string()),
+    year: v.number(),
+    professor: v.optional(v.string()),
+    grade: v.optional(v.string()), // Grade received (if applicable)
+    language: v.string(),
+    isPublic: v.boolean(),
+    isPremium: v.boolean(), // For premium content
+    downloadCount: v.number(),
+    viewCount: v.number(),
+    likeCount: v.number(),
+    commentCount: v.number(),
+    rating: v.number(), // Average rating
+    ratingCount: v.number(),
+    isApproved: v.boolean(),
+    moderatedBy: v.optional(v.id("users")),
+    moderatedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_author", ["authorId"])
+    .index("by_university", ["universityId"])
+    .index("by_course", ["courseId"])
+    .index("by_category", ["categoryId"])
+    .index("by_type", ["documentType"])
+    .index("by_approved", ["isApproved"])
+    .index("by_created_at", ["createdAt"])
+    .index("by_rating", ["rating"]),
 
   // Categories for organizing content
   categories: defineTable({
