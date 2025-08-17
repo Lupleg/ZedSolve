@@ -45,22 +45,223 @@ import {
 export function Header() {
   const { isSignedIn, user } = useUser();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/50 supports-[backdrop-filter]:bg-white/75">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="h-9 w-9 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
-                <BookOpen className="h-5 w-5 text-white" />
+          {/* Hamburger Menu + Logo */}
+          <div className="flex items-center space-x-3">
+            {/* Hamburger Menu */}
+            <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-lg transition-all duration-200"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="w-[280px] bg-white border-r border-gray-200 p-0"
+              >
+                <div className="flex flex-col h-full">
+                  {/* Welcome Header */}
+                  <div className="p-6 border-b border-gray-200">
+                    <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                      Welcome to ZedSolve
+                    </h2>
+                    <p className="text-sm text-gray-600 mb-4">
+                      Sign in to access study resources
+                    </p>
+                    
+                    {/* Auth Buttons - Only show if not signed in */}
+                    {!isSignedIn && (
+                      <div className="flex space-x-2 mb-6">
+                        <SignInButton mode="modal">
+                          <Button 
+                            variant="outline" 
+                            className="flex-1 border-gray-300 text-gray-700 hover:bg-gray-50"
+                          >
+                            Sign in
+                          </Button>
+                        </SignInButton>
+                        <SignInButton mode="modal">
+                          <Button 
+                            className="flex-1 bg-green-500 hover:bg-green-600 text-white"
+                          >
+                            Register
+                          </Button>
+                        </SignInButton>
+                      </div>
+                    )}
+
+                    {/* User Profile Section */}
+                    <div className="flex items-center space-x-3 mb-4">
+                      <div className="h-12 w-12 bg-gray-200 rounded-full flex items-center justify-center">
+                        {isSignedIn ? (
+                          <UserButton
+                            afterSignOutUrl="/"
+                            appearance={{
+                              elements: {
+                                avatarBox: "h-12 w-12",
+                              },
+                            }}
+                          />
+                        ) : (
+                          <User className="h-6 w-6 text-gray-500" />
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-blue-600">
+                          {isSignedIn
+                            ? user?.firstName || "User"
+                            : "Guest user"}
+                        </h3>
+                        <p className="text-sm text-blue-600 cursor-pointer hover:underline">
+                          + Add your university or school
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex justify-between text-center mb-4">
+                      <div>
+                        <div className="text-xl font-semibold text-gray-900">
+                          0
+                        </div>
+                        <div className="text-sm text-gray-500">Followers</div>
+                      </div>
+                      <div>
+                        <div className="text-xl font-semibold text-gray-900">
+                          0
+                        </div>
+                        <div className="text-sm text-gray-500">Uploads</div>
+                      </div>
+                      <div>
+                        <div className="text-xl font-semibold text-gray-900">
+                          0
+                        </div>
+                        <div className="text-sm text-gray-500">Upvotes</div>
+                      </div>
+                    </div>
+
+                    {/* New Button - Only show if signed in */}
+                    {isSignedIn && (
+                      <Button
+                        asChild
+                        className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full py-3"
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        <Link href="/upload">
+                          <Plus className="h-4 w-4 mr-2" />
+                          New
+                        </Link>
+                      </Button>
+                    )}
+                  </div>
+
+                  {/* Navigation Menu */}
+                  <nav className="flex-1 p-4 space-y-1">
+                    <Link
+                      href="/"
+                      className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <Home className="h-5 w-5" />
+                      <span className="font-medium">Home</span>
+                    </Link>
+
+                    <Link
+                      href="/profile"
+                      className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <Library className="h-5 w-5" />
+                      <span className="font-medium">My Library</span>
+                    </Link>
+
+                    <Link
+                      href="/documents"
+                      className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <StickyNote className="h-5 w-5" />
+                      <span className="font-medium">AI Notes</span>
+                    </Link>
+
+                    <Link
+                      href="/search"
+                      className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <Bot className="h-5 w-5" />
+                      <span className="font-medium">Ask AI</span>
+                    </Link>
+
+                    <div className="flex items-center space-x-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors duration-200">
+                      <Trophy className="h-5 w-5" />
+                      <span className="font-medium">AI Quiz</span>
+                      <span className="ml-auto bg-pink-500 text-white text-xs px-2 py-1 rounded-full">
+                        New
+                      </span>
+                    </div>
+
+                    {/* Recent Section */}
+                    <div className="pt-4">
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <div className="flex items-center space-x-3 text-gray-700">
+                          <Clock className="h-5 w-5" />
+                          <span className="font-medium">Recent</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4 text-gray-500" />
+                      </div>
+                      <div className="ml-8 text-sm text-gray-500 px-3 py-1">
+                        My Library
+                      </div>
+                    </div>
+
+                    {/* Courses Section */}
+                    <div className="pt-2">
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <div className="flex items-center space-x-3 text-gray-700">
+                          <FolderOpen className="h-5 w-5" />
+                          <span className="font-medium">Courses</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4 text-gray-500" />
+                      </div>
+                    </div>
+
+                    {/* Studylists Section */}
+                    <div className="pt-2">
+                      <div className="flex items-center justify-between px-3 py-2">
+                        <div className="flex items-center space-x-3 text-gray-700">
+                          <Users className="h-5 w-5" />
+                          <span className="font-medium">Studylists</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4 text-gray-500" />
+                      </div>
+                    </div>
+                  </nav>
+                </div>
+              </SheetContent>
+            </Sheet>
+
+            {/* Logo */}
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <div className="h-9 w-9 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-200">
+                  <BookOpen className="h-5 w-5 text-white" />
+                </div>
               </div>
-            </div>
-            <span className="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-              ZedSolve
-            </span>
-          </Link>
+              <span className="font-bold text-xl text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
+                ZedSolve
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
